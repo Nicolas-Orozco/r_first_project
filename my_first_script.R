@@ -10,10 +10,18 @@
 #speed <- distance/time
 
 library(dslabs)
-data(murders)
-murder_rate <- murders$total/murders$population*100000
-safe <- murder_rate <= 1
-west <- murders$region == "West"
-index <- safe & west
-murders$state[index]
+library(dplyr)
+#data(murders)
+#murder_rate <- murders$total/murders$population*100000
+#safe <- murder_rate <= 1
+#west <- murders$region == "West"
+#index <- safe & west
+#murders$state[index]
+#c("Massachusetts") %in% murders$state
 
+#murders <- mutate(murders, rate=total/population*100000)
+#filter(murders, rate <= 0.71)
+#new_table <- select(murders,state,region,rate)
+#filter(new_table, rate <= 0.71)
+
+murders %>% select(state,region,rate) %>% filter(rate <= 0.71)
