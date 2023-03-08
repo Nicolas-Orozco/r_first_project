@@ -20,14 +20,20 @@ library(dplyr)
 #c("Massachusetts") %in% murders$state
 
 #murders <- mutate(murders, rate=total/population*100000)
-#filter(murders, rate <= 0.71)
+#murders %>% filter(region == "Northeast")
 #new_table <- select(murders,state,region,rate)
 #filter(new_table, rate <= 0.71)
 
 #murders %>% select(state,region,rate) %>% filter(rate <= 0.71)
 
 # creating a data frame with stringAsFactors = FALSE
-grades <- data.frame(names = c("John", "Juan", "Jean", "Yao"), 
-                     exam_1 = c(95, 80, 90, 85), 
-                     exam_2 = c(90, 85, 85, 90),
-                     stringsAsFactors = FALSE)
+#grades <- data.frame(names = c("John", "Juan", "Jean", "Yao"), 
+#                     exam_1 = c(95, 80, 90, 85), 
+#                     exam_2 = c(90, 85, 85, 90),
+#                     stringsAsFactors = FALSE)
+population_in_millions <- murders$population/10^6
+total_gun_murders <- murders$total
+plot(population_in_millions, total_gun_murders)
+murders <- mutate(murders, rate = total / population * 100000)
+hist(murders$rate)
+boxplot(rate~region, data = murders)
