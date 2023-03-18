@@ -11,7 +11,7 @@
 
 library(dslabs)
 library(dplyr)
-#data(murders)
+data(murders)
 #murder_rate <- murders$total/murders$population*100000
 #safe <- murder_rate <= 1
 #west <- murders$region == "West"
@@ -31,9 +31,20 @@ library(dplyr)
 #                     exam_1 = c(95, 80, 90, 85), 
 #                     exam_2 = c(90, 85, 85, 90),
 #                     stringsAsFactors = FALSE)
-population_in_millions <- murders$population/10^6
-total_gun_murders <- murders$total
-plot(population_in_millions, total_gun_murders)
-murders <- mutate(murders, rate = total / population * 100000)
-hist(murders$rate)
-boxplot(rate~region, data = murders)
+#population_in_millions <- murders$population/10^6
+#total_gun_murders <- murders$total
+#plot(population_in_millions, total_gun_murders)
+#murders <- mutate(murders, rate = total / population * 100000)
+#hist(murders$rate)
+#boxplot(rate~region, data = murders)
+
+murders <- mutate(murders, rate= total/population * 10^5)
+s<- murders %>%
+  filter(region == "West") %>%
+  summarize(mininum = min(rate),
+            median = median(rate),
+            maximum = max(rate))
+s
+us_murder_rate <- murders %>% 
+  summarize(rate = sum(total) / sum(population) * 10^5)
+us_murder_rate
