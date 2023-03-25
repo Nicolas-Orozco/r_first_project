@@ -31,6 +31,7 @@ data(murders)
 #                     exam_1 = c(95, 80, 90, 85), 
 #                     exam_2 = c(90, 85, 85, 90),
 #                     stringsAsFactors = FALSE)
+<<<<<<< HEAD
 #population_in_millions <- murders$population/10^6
 #total_gun_murders <- murders$total
 #plot(population_in_millions, total_gun_murders)
@@ -48,3 +49,17 @@ s
 us_murder_rate <- murders %>% 
   summarize(rate = sum(total) / sum(population) * 10^5)
 us_murder_rate
+=======
+# load packages
+library(tidyverse)
+murders <- mutate(murders, rate = total / population * 10^5)
+
+# group by region
+murders %>% group_by(region)
+
+# summarize after grouping
+murders %>% 
+  group_by(region) %>%
+  summarize(median = median(rate))
+murders %>% arrange(desc(rate)) %>% top_n(10)
+>>>>>>> main
