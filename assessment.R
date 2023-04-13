@@ -5,4 +5,21 @@ average <- mean(heights$height)
 ind <- c(which(heights$sex == "Female"))
 print(length(ind))
 min_height = min(heights$height)
-print(match(min_height, heights$height))
+min_index <- match(min_height, heights$height)
+print(heights$sex[min_index])
+
+# max height
+max_height = max(heights$height)
+print(max_height)
+
+calculateint <- function(n1, n2){
+  n1 <- round(n1)
+  n2 <- round(n2)
+  if (abs(n1-n2) <= 1)
+    return(NULL)
+  if (n2 < n1)
+    return(seq.int(from = n2 + 1, length.out = abs(n1 - n2) - 1))
+  return(seq.int(from = n1 + 1, length.out = abs(n1 - n2) - 1))
+}
+
+sum(!calculateint(min_height, max_height) %in% heights$height)
