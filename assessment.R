@@ -1,4 +1,5 @@
 library(dslabs)
+library(dplyr)
 data(heights)
 options(digits = 3)    # report 3 significant digits for all answers
 average <- mean(heights$height)
@@ -23,3 +24,10 @@ calculateint <- function(n1, n2){
 }
 
 sum(!calculateint(min_height, max_height) %in% heights$height)
+new_heights <- mutate(heights, ht_cm = height *2.54)
+new_heights$ht_cm[18]
+mean(new_heights$ht_cm)
+
+# females dataset
+females <- data.frame(filter(new_heights, sex == "Female"))
+mean(females$ht_cm)
